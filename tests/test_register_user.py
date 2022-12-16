@@ -1,13 +1,6 @@
-from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-
-"""LOCATORS"""
-title_register_acc = (By.CSS_SELECTOR, ".col-sm-9 h1")
-radio_btn_NO = (By.CSS_SELECTOR, "label:nth-child(2) > input[type=radio]")
-input_firstname = (By.CSS_SELECTOR, "#input-firstname")
-list_group_tab = (By.CSS_SELECTOR, ".list-group")
-registered_user_warning = (By.CSS_SELECTOR, ".col-sm-9 p")
+from locators import *
 
 
 def test_register_user_page_elements_presence(browser, base_url):

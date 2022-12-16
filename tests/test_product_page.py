@@ -1,15 +1,7 @@
 import pytest
-from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-
-"""LOCATORS"""
-tab_description = (By.CSS_SELECTOR, 'a[href^="#tab-description"]')
-tab_review = (By.CSS_SELECTOR, 'a[href^="#tab-review"]')
-add_to_cart_btn = (By.CSS_SELECTOR, "#button-cart")
-product_name_title = (By.CSS_SELECTOR, "#content .col-sm-4 h1")
-product_name_tab = (By.CSS_SELECTOR, "#product-product > ul > li:nth-child(2) > a")
-wishlist_btn = (By.CSS_SELECTOR, "div.col-sm-4 > div.btn-group > button:nth-child(1)")
+from locators import *
 
 
 @pytest.mark.parametrize(

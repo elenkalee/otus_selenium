@@ -1,16 +1,8 @@
 import pytest
-from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
-
-"""LOCATORS"""
-catalog_name_title = (By.CSS_SELECTOR, "#content h2")
-empty_catalog_msg = (By.CSS_SELECTOR, "#content p")
-grid_view_btn = (By.CSS_SELECTOR, "#grid-view")
-list_view_btn = (By.CSS_SELECTOR, "#list-view")
-product_thumb = (By.CSS_SELECTOR, ".product-thumb")
-product_compare = (By.CSS_SELECTOR, "#compare-total")
+from locators import *
 
 
 @pytest.mark.parametrize(

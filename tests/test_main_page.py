@@ -1,13 +1,6 @@
-from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-
-"""LOCATORS"""
-search_input = (By.CSS_SELECTOR, "#search")
-main_menu = (By.CSS_SELECTOR, "#menu")
-form_currency = (By.CSS_SELECTOR, "#form-currency")
-footer_rigths = (By.CSS_SELECTOR, "footer>div>p")
-cart_btn = (By.CSS_SELECTOR, "#cart > button")
+from locators import *
 
 
 def test_main_page_elements_presence(browser, base_url):

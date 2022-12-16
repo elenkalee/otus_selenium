@@ -1,13 +1,6 @@
-from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-
-"""LOCATORS"""
-login_details_msg = (By.CSS_SELECTOR, ".panel-title")
-submit_btn = (By.CSS_SELECTOR, '[type="submit"]')
-username_input = (By.CSS_SELECTOR, "#input-username")
-password_input = (By.CSS_SELECTOR, "#input-password")
-forgot_password_link = (By.CSS_SELECTOR, 'a[href*="forgotten"]')
+from locators import *
 
 
 def test_login_admin_page_elements_presence(browser, base_url):
