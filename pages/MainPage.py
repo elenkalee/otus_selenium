@@ -11,8 +11,6 @@ class MainPage(BasePage):
     CART_BTN = (By.CSS_SELECTOR, "#cart > button")
     CURRENCY_FORM = (By.CSS_SELECTOR, "#form-currency")
     CURRENCY = {"GBP": "£", "EUR": "€", "USD": "$"}
-
-    # CURRENCY_BTN = (By.CSS_SELECTOR, "#top .btn-group")
     CURRENCY_DROPDOWN = (By.CSS_SELECTOR, "#top .btn-group .dropdown-menu")
     CURRENCY_SIGN = (By.CSS_SELECTOR, "button.btn-link strong")
 

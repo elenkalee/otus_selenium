@@ -1,22 +1,23 @@
 from pages.LoginAdminPage import LoginAdminPage
+import pytest_check as check
 
 
 class TestAdminPage:
     def test_login_admin_page_elements_presence(self, browser, base_url):
-        """Переделаны тесты из 1 задания.
-        Пока оставила такие же assertы, хотела применить библиотеку softtest, но пока не получилось"""
         login_page = LoginAdminPage(browser, base_url)
         login_page.open_page()
-        assert login_page.verify_submit_btn_el().text == "Login"
-        assert (
-            login_page.verify_username_input_el().get_attribute("placeholder")
-            == "Username"
+        check.equal(login_page.verify_submit_btn_el().text, "Login")
+        check.equal(
+            login_page.verify_username_input_el().get_attribute("placeholder"),
+            "Username",
         )
-        assert (
-            login_page.verify_password_input_el().get_attribute("placeholder")
-            == "Password"
+        check.equal(
+            login_page.verify_password_input_el().get_attribute("placeholder"),
+            "Password",
         )
-        assert login_page.verify_forgot_password_link_el().text == "Forgotten Password"
+        check.equal(
+            login_page.verify_forgot_password_link_el().text, "Forgotten Password"
+        )
 
     def test_login_as_admin(self, browser, base_url):
         """Авторизация в роли Администратора"""
