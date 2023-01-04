@@ -1,3 +1,4 @@
 pytest==7.2.0
 selenium==4.6.0
 pre-commit==2.20.0
+softest==1.2.0.0

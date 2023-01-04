@@ -1,23 +1,24 @@
-from selenium.webdriver.support.wait import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from locators import *
+from pages.MainPage import MainPage
 
 
-def test_main_page_elements_presence(browser, base_url):
-    browser.get(base_url)
-    wait = WebDriverWait(browser, 3)
+class TestMainPage:
+    def test_main_page_elements_presence(self, browser, base_url):
+        """Переделаны тесты из 1 задания.
+        Пока оставила такие же assertы, хотела применить библиотеку softtest, но пока не получилось"""
+        main_page = MainPage(browser, base_url)
+        main_page.open_page()
+        assert (
+            main_page.verify_search_input_el().get_attribute("class") == "input-group"
+        )
+        assert main_page.verify_currency_el().get_attribute("method") == "post"
+        assert "Your Store © " in main_page.verify_footer_el().text
+        assert "Software" in main_page.verify_main_menu_el().text
+        assert main_page.verify_cart_btn_el().get_attribute("data-toggle") == "dropdown"
 
-    currency_el = wait.until(EC.visibility_of_element_located(form_currency))
-    assert currency_el.get_attribute("method") == "post"
+    def test_change_currency(self, browser, base_url):
+        """Переключение валют из верхнего меню опенкарта"""
 
-    search_el = wait.until(EC.visibility_of_element_located(search_input))
-    assert search_el.get_attribute("class") == "input-group"
-
-    footer_rights_el = wait.until(EC.visibility_of_element_located(footer_rigths))
-    assert "Your Store © " in footer_rights_el.text
-
-    main_menu_el = wait.until(EC.visibility_of_element_located(main_menu))
-    assert "Software" in main_menu_el.text, "Menu tab"
-
-    cart_btn_el = wait.until(EC.visibility_of_element_located(cart_btn))
-    assert cart_btn_el.get_attribute("data-toggle") == "dropdown"
+        main_page = MainPage(browser, base_url)
+        main_page.open_page()
+        main_page.change_currency("GBP")
+        assert main_page.CURRENCY["GBP"] == main_page.current_currency_sign
