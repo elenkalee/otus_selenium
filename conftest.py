@@ -13,10 +13,10 @@ def pytest_addoption(parser):
     parser.addoption("--browser", default="chrome")
     parser.addoption(
         "--driver_folder",
-        default="/Users/elenalee/Desktop/PycharmProjects/otus_selenium/drivers_mac",
+        default="/Users/elenalee/PycharmProjects/drivers",
     )
     parser.addoption("--headless", action="store_true")
-    parser.addoption("--url", action="store", default="http://192.168.0.101:8081")
+    parser.addoption("--url", action="store", default="http://192.168.0.100:8081")
 
 
 @pytest.fixture
