@@ -1,8 +1,10 @@
 from pages.LoginAdminPage import LoginAdminPage
 import pytest_check as check
+import allure
 
 
 class TestAdminPage:
+    @allure.title("Check if all elements are present on Admin Login Page")
     def test_login_admin_page_elements_presence(self, browser, base_url):
         login_page = LoginAdminPage(browser, base_url)
         login_page.open_page()
@@ -19,18 +21,20 @@ class TestAdminPage:
             login_page.verify_forgot_password_link_el().text, "Forgotten Password"
         )
 
+    @allure.title("Check if possible to login as admin")
     def test_login_as_admin(self, browser, base_url):
         """Авторизация в роли Администратора"""
         login_page = LoginAdminPage(browser, base_url)
         login_page.open_page()
         assert (
-            "Please enter your login details."
-            in login_page.verify_login_details_msg_el().text
+                "Please enter your login details."
+                in login_page.verify_login_details_msg_el().text
         )
 
         login_page.login_as_admin()
         assert browser.title == "Dashboard"
 
+    @allure.title("Check if possible to add a new product to the product list as admin")
     def test_add_new_product_as_admin(self, browser, base_url):
         """Добавление нового товара в разделе администратора"""
         login_page = LoginAdminPage(browser, base_url)
@@ -39,13 +43,14 @@ class TestAdminPage:
         product_name = "Test Product"
         login_page.open_list_of_products()
         assert (
-            product_name not in login_page.get_products_list()
+                product_name not in login_page.get_products_list()
         ), f"Product {product_name} already exists"
         login_page.add_new_product(product_name)
         assert (
-            product_name in login_page.get_products_list()
+                product_name in login_page.get_products_list()
         ), f"Product {product_name} wasn't found"
 
+    @allure.title("Check if possible to delete product from the product list as admin")
     def test_delete_product_as_admin(self, browser, base_url):
         """Удаление товара из списка в разделе администратора"""
         login_page = LoginAdminPage(browser, base_url)
@@ -54,9 +59,9 @@ class TestAdminPage:
         product_name = "Test Product"
         login_page.open_list_of_products()
         assert (
-            product_name in login_page.get_products_list()
+                product_name in login_page.get_products_list()
         ), f"Product {product_name} wasn't found"
         login_page.delete_product_as_admin()
         assert (
-            product_name not in login_page.get_products_list()
+                product_name not in login_page.get_products_list()
         ), f"Product {product_name} still exists"

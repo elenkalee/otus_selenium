@@ -1,8 +1,11 @@
 from pages.MainPage import MainPage
 import pytest_check as check
+import allure
 
 
 class TestMainPage:
+
+    @allure.title("Check if all elements are present on Main Page")
     def test_main_page_elements_presence(self, browser, base_url):
         main_page = MainPage(browser, base_url)
         main_page.open_page()
@@ -16,6 +19,7 @@ class TestMainPage:
             main_page.verify_cart_btn_el().get_attribute("data-toggle"), "dropdown"
         )
 
+    @allure.title("Check if possible to change currency from drop-down menu")
     def test_change_currency(self, browser, base_url):
         """Переключение валют из верхнего меню опенкарта"""
 
