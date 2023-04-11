@@ -1,8 +1,10 @@
 from pages.RegisterPage import RegisterUser
 import pytest_check as check
+import allure
 
 
 class TestRegisterUser:
+    @allure.title("Check if all elements are present on User Register Page")
     def test_register_user_page_elements_presence(self, browser, base_url):
         register_user = RegisterUser(browser, base_url)
         register_user.open_page()
@@ -23,6 +25,7 @@ class TestRegisterUser:
         )
         check.equal(len(register_user.verify_list_group_tab_el()), 1)
 
+    @allure.title("Check if possible to register a new user")
     def test_register_new_user(self, browser, base_url):
         """Регистрация нового пользователя в магазине опенкарта"""
         register_user = RegisterUser(browser, base_url)

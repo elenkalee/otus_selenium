@@ -1,5 +1,8 @@
+import allure
+
 from .BasePage import BasePage
 from selenium.webdriver.common.by import By
+from data import ADMIN
 
 
 class LoginAdminPage(BasePage):
@@ -20,6 +23,7 @@ class LoginAdminPage(BasePage):
     SUCCESS_ALERT = (By.CSS_SELECTOR, ".alert-success")
     DELETE_BTN = (By.CSS_SELECTOR, ".btn-danger")
 
+    @allure.step(f"Open admin login page")
     def open_page(self):
         return self.driver.get(self.base_url + "/admin")
 
@@ -38,11 +42,13 @@ class LoginAdminPage(BasePage):
     def verify_login_details_msg_el(self):
         return self._verify_element_visibility(self.LOGIN_DETAILS_MSG)
 
+    @allure.step("Input admin login and password")
     def login_as_admin(self):
-        self._input_fill(self.USERNAME_INPUT, "user")
-        self._input_fill(self.PASSWORD_INPUT, "bitnami")
+        self._input_fill(self.USERNAME_INPUT, ADMIN["username"])
+        self._input_fill(self.PASSWORD_INPUT, ADMIN["password"])
         self._verify_element_visibility(self.SUBMIT_BTN).click()
 
+    @allure.step("Open the product list")
     def open_list_of_products(self):
         self._find_and_click_element(self.MENU_CATALOG_TAB)
         self._find_and_click_element(self.MENU_CATALOG_PRODUCTS_TAB)
@@ -51,6 +57,7 @@ class LoginAdminPage(BasePage):
         products_list = self._verify_element_visibility(self.PRODUCTS_LIST)
         return products_list.text
 
+    @allure.step("Add a new product to the product list")
     def add_new_product(self, name):
         self._find_and_click_element(self.ADD_NEW_BTN)
         self._input_fill(self.PRODUCT_NAME_INPUT, name)
@@ -60,6 +67,7 @@ class LoginAdminPage(BasePage):
         self._find_and_click_element(self.SAVE_BTN)
         self._verify_element_visibility(self.SUCCESS_ALERT)
 
+    @allure.step("Delete a product")
     def delete_product_as_admin(self):
         last_product = self.get_last_product()
         checkbox = last_product.find_element(By.TAG_NAME, "input")
@@ -68,12 +76,14 @@ class LoginAdminPage(BasePage):
         self.accept_delete_alert()
         self._verify_element_visibility(self.SUCCESS_ALERT)
 
+    @allure.step('Get the last product from the list')
     def get_last_product(self):
         products_list = (
             self._verify_element_visibility(self.PRODUCTS_LIST)
         ).find_elements(By.TAG_NAME, "tr")
         return products_list[len(products_list) - 1]
 
+    @allure.step("Click to accept delete alert")
     def accept_delete_alert(self):
         confirm_alert = self.driver.switch_to.alert
         confirm_alert.accept()

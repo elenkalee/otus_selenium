@@ -1,8 +1,10 @@
 import pytest
 from pages.CatalogPage import CatalogPage
 import pytest_check as check
+import allure
 
 
+@allure.title("Check if all elements are present on Catalog Page")
 @pytest.mark.parametrize(
     "catalog", ["/desktops", "/camera", "/mp3-players", "/laptop-notebook"]
 )

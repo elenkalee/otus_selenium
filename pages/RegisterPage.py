@@ -1,5 +1,6 @@
 from .BasePage import BasePage
 from selenium.webdriver.common.by import By
+from data import TEST_USER
 
 
 class RegisterUser(BasePage):
@@ -36,12 +37,12 @@ class RegisterUser(BasePage):
         return self._verify_element_visibility(self.REGISTERED_USER_WARNING)
 
     def fill_register_user_form(self):
-        self._input_fill(self.INPUT_FIRSTNAME, "test_name")
-        self._input_fill(self.INPUT_LASTNAME, "test_lastname")
-        self._input_fill(self.INPUT_EMAIL, "test@email.ru")
-        self._input_fill(self.INPUT_TELEPHONE, "+79786567889")
-        self._input_fill(self.INPUT_PASSWORD, "password")
-        self._input_fill(self.INPUT_CONFIRM, "password")
+        self._input_fill(self.INPUT_FIRSTNAME, TEST_USER["firstname"])
+        self._input_fill(self.INPUT_LASTNAME, TEST_USER["lastname"])
+        self._input_fill(self.INPUT_EMAIL, TEST_USER["email"])
+        self._input_fill(self.INPUT_TELEPHONE, TEST_USER["telephone"])
+        self._input_fill(self.INPUT_PASSWORD, TEST_USER["password"])
+        self._input_fill(self.INPUT_CONFIRM, TEST_USER["password"])
         self._find_and_click_element(self.POLICY_CHECKBOX)
         self._find_and_click_element(self.SUBMIT_BTN)
         self._verify_element_visibility(self.SUCCESS_REGISTRATION)

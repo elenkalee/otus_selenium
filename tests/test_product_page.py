@@ -1,8 +1,10 @@
 import pytest
 from pages.ProductPage import ProductPage
 import pytest_check as check
+import allure
 
 
+@allure.title("Check if all elements are present on Product Page")
 @pytest.mark.parametrize("product", ["/canon-eos-5d", "/hp-lp3065", "/htc-touch-hd"])
 def test_product_page_elements_presence(browser, base_url, product):
     product_page = ProductPage(browser, base_url + product)
